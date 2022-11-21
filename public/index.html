@@ -25,16 +25,34 @@
 
     <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message { background: white; max-width: 500px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
       #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
       #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
       #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
       #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
       #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+
+      blink { animation: blinker 1.5s linear infinite; color: red; font-family: sans-serif; } @keyframes blinker { 50% { opacity: 0; } }
+
       #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
       @media (max-width: 600px) {
         body, #message { margin-top: 0; background: white; box-shadow: none; }
         body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+
+    <style>
+      .blink {
+        animation: blinker 1.5s linear infinite;
+        color: blue;
+			  font-size: 10px;
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
       }
     </style>
 
@@ -44,19 +62,49 @@
   <body>
     <div id="message">
       <h2>Olá pessoal da Consignus!!!</h2>
-      <h1>Teste de hospedagem no Firebase Hosting</h1>
-      <p>Faça login para testar.</p>
-      <p>Para login com email, entre com <strong>teste@teste.com</strong> e senha <strong>111111</strong>.</p>
-      <!-- <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a> -->
-      
-      <!-- Informações do Firebase Authentication -->
-      <div id="firebaseui-auth-container">
+      <h1>Exemplo de hospedagem no Firebase Hosting</h1>
+      <p>Esta página está hospedada no <strong>Firebase Hosting</strong>.</p>
 
+      <hr/>
+
+      <!-- Informações do Firebase Authentication -->
+      <p><strong>Login</strong></p>
+      <p>Exemplo de login com o <strong>Firebase Authentication</strong></p>
+
+      <li>Para login com o Google, entre com seu email e senha do Google <strong>válidos</strong>.</li>
+      <li>Para login com email, entre com <strong style="font-family: 'Courier New', Courier, monospace;">teste@teste.com</strong> e senha <strong style="font-family: 'Courier New', Courier, monospace">111111</strong>.</li>
+
+      <p class="blink">
+        <i>(*) Ou, em ambos os casos, insira um email <strong>válido</strong> diferente.<br/>O <strong>Firebase Authentication</strong> irá criar um novo usuário automaticamente.</i>
+      </p>
+
+      <div id="firebaseui-auth-container">
+        
       </div>
+
+      <p>
+        <hr/>
+      </p>
+
+      <!-- Informações do Firebase Firestore -->
+      <p><strong>Teste de post de mensagens.</strong></p>
+      <p>Exemplo de armazenamento no banco de dados com o <strong>Firebase Firestore</strong></p>
+      
+      <form action="" id="postForm">
+        Escreva uma mensagem:
+        <input type="textarea" id="postText"/>
+        <button type="submit">➤</button>
+      </form>
+
+      <ul id="posts">
+
+      </ul>
     </div>
     <p id="load">Firebase SDK Loading&hellip;</p>
 
     <script src="login.js"></script>
+
+    <script src="bd.js"></script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -100,6 +148,8 @@
               console.log(user);
             }
           });
+
+          loadPosts();
         } catch (e) {
           console.error(e);
           loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
