@@ -1,0 +1,12 @@
+1 - Baixar e instalar o npm (https://nodejs.org/en/)
+
+## Comandos terminal
+HOSTING
+----------------------------------------------------------------
+2 - npm install -g firebase-tools - Executar na pasta do projeto
+3 - firebase login
+4 - firebase init
+5 - firebase deploy
+
+AUTH
+----------------------------------------------------------------
